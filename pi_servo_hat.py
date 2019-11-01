@@ -330,8 +330,8 @@ class PiServoHat(object):
 			print("Total (max. 4096): %s" % (on_value + off_value))
 		
 		# Move servo to position immediately
-		self.PCA9685.set_channel_word(channel, 1, on_value)
-		self.PCA9685.set_channel_word(channel, 0, off_value)
+		self.PCA9685.set_channel_word(channel, 1, on_value)		# Timing for "On" edge of PWM
+		self.PCA9685.set_channel_word(channel, 0, off_value)	# Timing for "Off" edge of PWM
 		
 
 	def set_duty_cycle(self, channel, duty_cycle):
@@ -373,8 +373,8 @@ class PiServoHat(object):
 			print("Total (max. 4096): %s" % (on_value + off_value))
 		
 		# Change Duty-Cycle
-		self.PCA9685.set_channel_word(channel, 1, on_value)
-		self.PCA9685.set_channel_word(channel, 0, off_value)
+		self.PCA9685.set_channel_word(channel, 1, on_value)		# Timing for "On" edge of PWM
+		self.PCA9685.set_channel_word(channel, 0, off_value)	# Timing for "Off" edge of PWM
 
 	#----------------------------------------------
 	# Retrieves Servo Position on Specified Channel (in Degrees)
@@ -406,8 +406,8 @@ class PiServoHat(object):
 				print(self.available_pwm_channels)
 				print("Selected Channel: %s" % channel)
 
-		initial_on = self.PCA9685.get_channel_word(channel, 1)
-		initial_off = self.PCA9685.get_channel_word(channel, 0)
+		initial_on = self.PCA9685.get_channel_word(channel, 1)	# Timing for "On" edge of PWM
+		initial_off = self.PCA9685.get_channel_word(channel, 0)	# Timing for "Off" edge of PWM
 
 		# Debug message
 		if self.debug == 1:
