@@ -45,6 +45,7 @@ The PiServoHat Python package current supports the following platforms:
 Dependencies 
 ---------------
 This package depends on the qwiic I2C driver: [Qwiic_I2C_Py](https://github.com/sparkfun/Qwiic_I2C_Py)
+
 This package depends on the PCA9685 PWM controller: [Qwiic_PCA9685_Py](https://github.com/sparkfun/Qwiic_PCA9685_Py)
 
 Documentation
