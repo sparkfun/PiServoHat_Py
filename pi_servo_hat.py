@@ -330,7 +330,7 @@ class PiServoHat(object):
 			print("Total (max. 4096): %s" % (on_value + off_value))
 		
 		# Move servo to position immediately
-		self.PCA9685.set_channel_word(channel, 1, on_value)		# Timing for "On" edge of PWM
+		self.PCA9685.set_channel_word(channel, 1, on_value)	# Timing for "On" edge of PWM
 		self.PCA9685.set_channel_word(channel, 0, off_value)	# Timing for "Off" edge of PWM
 		
 
@@ -373,7 +373,7 @@ class PiServoHat(object):
 			print("Total (max. 4096): %s" % (on_value + off_value))
 		
 		# Change Duty-Cycle
-		self.PCA9685.set_channel_word(channel, 1, on_value)		# Timing for "On" edge of PWM
+		self.PCA9685.set_channel_word(channel, 1, on_value)	# Timing for "On" edge of PWM
 		self.PCA9685.set_channel_word(channel, 0, off_value)	# Timing for "Off" edge of PWM
 
 	#----------------------------------------------
