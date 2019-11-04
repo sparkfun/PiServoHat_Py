@@ -44,9 +44,8 @@ The PiServoHat Python package current supports the following platforms:
 
 Dependencies 
 ---------------
-This driver package depends on the qwiic I2C driver: 
-[Qwiic_I2C_Py](https://github.com/sparkfun/Qwiic_I2C_Py)
-[Qwiic_PCA9685_Py](https://github.com/sparkfun/Qwiic_PCA9685_Py)
+This package depends on the qwiic I2C driver: [Qwiic_I2C_Py](https://github.com/sparkfun/Qwiic_I2C_Py)
+This package depends on the PCA9685 PWM controller: [Qwiic_PCA9685_Py](https://github.com/sparkfun/Qwiic_PCA9685_Py)
 
 Documentation
 -------------
@@ -91,44 +90,33 @@ Example Use (to be editted)
 See the examples directory for more detailed use examples.
 
 ```python
-import qwiic_pca9685
+import pi_servo_hat
 import time
 import math
 import sys
 
 def runExample():
 
-	print("\nSparkFun BME280 Sensor  Example 1\n")
-	mySensor = qwiic_pca9685.QwiicPCA9685()
+	print("\nSparkFun Pi Servo Hat Demo\n")
+	mySensor = pi_servo_hat.PiServoHat()
 
 	if mySensor.isConnected() == False:
 		print("The Qwiic PCA9685 device isn't connected to the system. Please check your connection", \
 			file=sys.stderr)
 		return
 
-	mySensor.begin()
+	mySensor.restart()
   
-	# Sets PWM Frequency to 50 Hz
-	mySensor.set_pre_scale(50)
-  
-	# Sets start time of PWM pulse on Channel 0 to 0s
-	mySensor.set_channel_word(0, 1, 0)
+	# Test Run
+	#########################################
+	# Moves servo position to 0 degrees (1ms), Channel 0
+	test.move_servo_position(0, 0)
 
+	# Pause 1 sec
+	time.sleep (1)
 
-	while True:
-		# Increments start time of PWM pulse on Channel 0 to i (1ms to 2ms)
-		for i in range(205, 410):
-			fun.set_channel_word(0, 0, i)
-			# Delay .05 s
-			time.sleep(.1)
-
-		# Decrements start time of PWM pulse on Channel 0 to i (2ms to 1ms)
-		for i in range(410, 205, -1):
-			fun.set_channel_word(0, 0, i)
-			# Delay .05 s
-			time.sleep(.1)
-		
-		time.sleep(1)
+	# Moves servo position to 90 degrees (2ms), Channel 0
+	test.move_servo_position(0, 90)
 ```
 <p align="center">
 <img src="https://cdn.sparkfun.com/assets/custom_pages/3/3/4/dark-logo-red-flame.png" alt="SparkFun - Start Something">
