@@ -49,7 +49,7 @@ This package depends on the PCA9685 PWM controller: [Qwiic_PCA9685_Py](https://g
 
 Documentation
 -------------
-The SparkFun PiServoHat module documentation is hosted at [ReadTheDocs](https://qwiic-piservohat-py.readthedocs.io/en/latest/?)
+The SparkFun PiServoHat module documentation is hosted at [ReadTheDocs](https://piservohat-py.readthedocs.io/en/latest/)
 
 Installation
 -------------
