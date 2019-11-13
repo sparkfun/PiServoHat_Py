@@ -63,7 +63,7 @@ setup(
     author='SparkFun Electronics',
     author_email='info@sparkfun.com',
 
-    install_requires=['sparkfun_qwiic_i2c'], #, 'sparkfun_qwiic_pca9685'],
+    install_requires=['sparkfun_qwiic_i2c', 'sparkfun_qwiic_pca9685'],
 
     # Choose your license
     license='MIT',
