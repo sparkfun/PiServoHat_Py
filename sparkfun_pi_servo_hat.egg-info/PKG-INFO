@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: sparkfun-pi-servo-hat
+Version: 0.9.0
+Summary: SparkFun Electronics Pi Servo Hat
+Home-page: https://www.sparkfun.com/products/15316
+Author: SparkFun Electronics
+Author-email: info@sparkfun.com
+License: MIT
+Description: Pi Servo Hat
+        ==========================
+        
+        This package provdes support for the SparkFun Pi Servo Hat.
+Keywords: electronics,maker
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7

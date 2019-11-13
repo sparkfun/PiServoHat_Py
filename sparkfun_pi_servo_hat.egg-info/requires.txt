@@ -1,0 +1,2 @@
+sparkfun_qwiic_i2c
+sparkfun_qwiic_pca9685
