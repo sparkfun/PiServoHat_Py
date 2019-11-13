@@ -6,8 +6,8 @@ PiServoHat_Py
    <img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png"  width=240>   
 </p>
 <p align="center">
-	<a href="https://pypi.org/project/sparkfun-piservohat/" alt="Package">
-		<img src="https://img.shields.io/pypi/pyversions/sparkfun_piservohat.svg" /></a>
+	<a href="https://pypi.org/project/sparkfun-pi-servo-hat/" alt="Package">
+		<img src="https://img.shields.io/pypi/pyversions/sparkfun_pi_servo_hat.svg" /></a>
 	<a href="https://github.com/sparkfun/PiServoHat_Py/issues" alt="Issues">
 		<img src="https://img.shields.io/github/issues/sparkfun/PiServoHat_Py.svg" /></a>
 	<a href="https://piservohat-py.readthedocs.io/en/latest/" alt="Documentation">
@@ -56,16 +56,16 @@ Installation
 -------------
 
 ### PyPi Installation
-This repository is hosted on PyPi as the [sparkfun-piservohat](https://pypi.org/project/sparkfun-piservohat/) package. On systems that support PyPi installation via pip, this library is installed using the following commands
+This repository is hosted on PyPi as the [sparkfun-pi-servo-hat](https://pypi.org/project/sparkfun-pi-servo-hat/) package. On systems that support PyPi installation via pip, this library is installed using the following commands
 
 For all users (note: the user must have sudo privileges):
 ```sh
-sudo pip install sparkfun-piservohat
+sudo pip install sparkfun-pi-servo-hat
 ```
 For the current user:
 
 ```sh
-pip install sparkfun-qwiic-piservohat
+pip install sparkfun-qwiic-pi-servo-hat
 ```
 
 ### Local Installation
@@ -83,7 +83,7 @@ python setup.py sdist
 A package file is built and placed in a subdirectory called dist. This package file can be installed using pip.
 ```sh
 cd dist
-pip install sparkfun_piservohat-<version>.tar.gz
+pip install sparkfun_pi-servo-hat-<version>.tar.gz
   
 ```
 Example Use (to be editted)
