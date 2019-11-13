@@ -6,8 +6,8 @@ PiServoHat_Py
    <img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png"  width=240>   
 </p>
 <p align="center">
-	<a href="https://pypi.org/project/sparkfun-piservohat/" alt="Package">
-		<img src="https://img.shields.io/pypi/pyversions/sparkfun_piservohat.svg" /></a>
+	<a href="https://pypi.org/project/sparkfun-pi-servo-hat/" alt="Package">
+		<img src="https://img.shields.io/pypi/pyversions/sparkfun_pi_servo_hat.svg" /></a>
 	<a href="https://github.com/sparkfun/PiServoHat_Py/issues" alt="Issues">
 		<img src="https://img.shields.io/github/issues/sparkfun/PiServoHat_Py.svg" /></a>
 	<a href="https://piservohat-py.readthedocs.io/en/latest/" alt="Documentation">
