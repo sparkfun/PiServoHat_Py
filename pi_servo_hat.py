@@ -57,10 +57,10 @@ package.
 
 
 # Load Necessary Modules:
-import time								# Time access and conversion package
-import math								# Basic math package
-from qwiic_pca9685 import QwiicPCA9685	# PCA9685 LED driver package
-										# (used on Pi Servo pHAT)
+import time				# Time access and conversion package
+import math				# Basic math package
+import qwiic_pca9685	# PCA9685 LED driver package
+						# (used on Pi Servo pHAT)
 
 # Device Name:
 _DEFAULT_NAME = "Pi Servo HAT"
@@ -90,6 +90,21 @@ _AVAILABLE_I2C_ADDRESS = [0x40]
 _DEFAULT_SERVO_FREQUENCY = 50	# Hz
 
 class PiServoHat(object):
+	"""
+	SparkFun PiServoHat
+	Initialise the qwiic_pca9685 python module at ``address`` with ``i2c_driver``.
+
+		:param address:		The I2C address to use for the device.
+							If not provided, the default address is
+							used.
+		:param i2c_driver:	An existing i2c driver object. If not
+							provided a driver object is created.
+		
+		:return:			Constructor Initialization
+							True-	Successful
+							False-	Issue loading I2C driver
+		:rtype:				Bool
+	"""
 
 	# Constructor
 
@@ -149,11 +164,11 @@ class PiServoHat(object):
 			self.debug = debug	# Debug Statements Enabled (1)
 		
 		# Initialization
-		self.PCA9685 = QwiicPCA9685(self.address, debug)
+		self.PCA9685 = qwiic_pca9685.QwiicPCA9685(self.address, debug)
 		
 		#----------------------------------------------
 		# Grab Available Channels:
-		self.available_pwm_channels = QwiicPCA9685.available_pwm_channels
+		self.available_pwm_channels = qwiic_pca9685.QwiicPCA9685.available_pwm_channels
 
 		# #----------------------------------------------
 		# # Grab Current PWM Frequency
