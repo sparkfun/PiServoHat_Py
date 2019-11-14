@@ -8,11 +8,11 @@ be wary as they can damage their servo by giving it a position outside
 the standard range of motion.
 """
 
-from pi_servo_hat import PiServoHat
+import pi_servo_hat
 import time
 
 # Initialize Constructor
-test = PiServoHat()
+test = pi_servo_hat.PiServoHat()
 
 # Restart Servo Hat (in case Hat is frozen/locked)
 test.restart()
