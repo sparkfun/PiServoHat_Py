@@ -111,13 +111,13 @@ def runExample():
 	# Test Run
 	#########################################
 	# Moves servo position to 0 degrees (1ms), Channel 0
-	test.move_servo_position(0, 0)
+	mySensor.move_servo_position(0, 0)
 
 	# Pause 1 sec
 	time.sleep (1)
 
 	# Moves servo position to 90 degrees (2ms), Channel 0
-	test.move_servo_position(0, 90)
+	mySensor.move_servo_position(0, 90)
 ```
 <p align="center">
 <img src="https://cdn.sparkfun.com/assets/custom_pages/3/3/4/dark-logo-red-flame.png" alt="SparkFun - Start Something">
