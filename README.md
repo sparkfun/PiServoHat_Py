@@ -93,7 +93,6 @@ See the examples directory for more detailed use examples.
 ```python
 import pi_servo_hat
 import time
-import math
 import sys
 
 def runExample():
