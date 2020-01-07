@@ -123,7 +123,7 @@ for i in range(180, 0, -1):
 
 # 200 Hz Test
 #########################################
-# Set PWM Frequency to 100 Hz
+# Set PWM Frequency to 200 Hz
 test.set_pwm_frequency(200)
 
 # Sweep from 0 to 180 degrees and back
