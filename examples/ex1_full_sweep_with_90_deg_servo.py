@@ -69,13 +69,13 @@ test.restart()
 test.move_servo_position(0, 0)
 
 # Pause 1 sec
-time.sleep (1)
+time.sleep(1)
 
 # Moves servo position to 90 degrees (2ms), Channel 0
 test.move_servo_position(0, 90)
 
 # Pause 1 sec
-time.sleep (1)
+time.sleep(1)
 
 # Sweep
 #########################################
@@ -91,7 +91,7 @@ while True:
 
 #########################################
 # Code below may damage servo, use with caution
-# Test sweep for full range of servo (outside 0 to 180 degrees).
+# Test sweep for full range of servo (outside 0 to 90 degrees).
 # while True:
 #     for i in range(-23, 100):
 #         print(i)

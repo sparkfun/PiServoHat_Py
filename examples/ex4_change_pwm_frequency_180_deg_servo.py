@@ -69,13 +69,13 @@ test.restart()
 test.move_servo_position(0, 0, 180)
 
 # Pause 1 sec
-time.sleep (1)
+time.sleep(1)
 
 # Moves servo position to 180 degrees (2ms), Channel 0
 test.move_servo_position(0, 180, 180)
 
 # Pause 1 sec
-time.sleep (1)
+time.sleep(1)
 
 # 50 Hz Test
 #########################################
