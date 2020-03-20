@@ -65,7 +65,7 @@ sudo pip install sparkfun-pi-servo-hat
 For the current user:
 
 ```sh
-pip install sparkfun-qwiic-pi-servo-hat
+pip install sparkfun-pi-servo-hat
 ```
 
 ### Local Installation
