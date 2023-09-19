@@ -136,7 +136,7 @@ class PiServoHat(object):
 	
 	#----------------------------------------------
 	# Constructor
-	def __init__(self, address=None, debug = None, minPT=0.5, maxPT=2.5):
+	def __init__(self, address=None, debug = None, minPT=1, maxPT=2):
 		"""
 		This method initializes the class object. If no 'address' or
 		'i2c_driver' are inputed or 'None' is specified, the method will
@@ -153,10 +153,10 @@ class PiServoHat(object):
 							1-	Print debug statements
 		:param minPT:		The minimum pulse time of the servos in 
 							milliseconds.  If not provided, default to 
-							0.5 ms 
+							1 ms 
 		:param maxPT:		The maximum pulse time of the servos in 
 							milliseconds.  If not provided, default to 
-							2.5 ms 
+							2 ms 
 		"""
 		
 		# Did the user specify an I2C address?
@@ -287,7 +287,43 @@ class PiServoHat(object):
 		else:
 			return False
 
+	#----------------------------------------------
+	# Lists the current min and max pulse times
+	def get_pulse_time(self):
+		"""
+		Reads and returns the current min and max pulse times for servo movement
 
+		Returns:
+			String: A string containing the min and max pulse time values
+		"""
+
+		return f"Minimum Pulse Time: {str(self.minimumPulseWidth)} \nMaximum Pulse Time: {str(self.maximumPulseWidth)}"
+
+	#----------------------------------------------
+	# Updates the min and max pulse times for all servos by times in milliseconds
+	def set_pulse_time(self, minPulseTime, maxPulseTime):
+		"""
+		Updates the minimum and maximum pulse widths for the servos
+
+		Args:
+			minPulseTime (float): The new minimum pulse width in ms
+			maxPulseTime (float): The new maximum pulse width in ms
+
+		Returns:
+			bool: Returns true if update was successful, false if an error was encountered
+		"""
+
+		try:
+			if float(minPulseTime) < float(maxPulseTime):
+				self.minimumPulseWidth = minPulseTime
+				self.maximumPulseWidth = maxPulseTime
+			else:
+				self.maximumPulseWidth = minPulseTime
+				self.minimumPulseWidth = maxPulseTime
+
+			return True
+		except:
+			return False
 	#----------------------------------------------
 	# Moves Servo on Specified Channel to Position (in Degrees)
 	def move_servo_position(self, channel, position, swing = None):
@@ -335,15 +371,6 @@ class PiServoHat(object):
 		# Debug message
 		if self.debug == 1:
 			print("Servo Range: %s" % swing)
-
-		# 180 Degree Servo Timing:
-		# 	0 	Degrees	=	1.0	ms
-		#	90	Degrees	=	1.5	ms
-		#	180	Degrees	=	2.0	ms
-		# 90 Degree Servo Timing:
-		# 	0 	Degrees	=	1.0	ms
-		# 	45	Degrees	=	1.5	ms
-		#	90	Degrees	=	2.0	ms
 		
 		if swing == None:
 			swing = 90	# Default
@@ -351,16 +378,14 @@ class PiServoHat(object):
 			raise Exception("Error: 'swing' input value. Must be 90 or 180.")
 		
 		# Servo Timing
-		#m = 1 / swing								# ms/degree
-		#position_time = (m *position + 1) / 1000	# seconds (float)
-
 		ratio = float(position) / swing # the ratio of the movement to the max angle
 		timeDif = self.maximumPulseWidth - self.minimumPulseWidth # the representation of the max movement range in terms of time
 
 		# converts movement back into a position time
 		position_time = ((ratio * timeDif) + self.minimumPulseWidth) / 1000 # convert back into seconds (float)
 
-		print(f"Ratio: {str(ratio)}, timeDif: {str(timeDif)}, pt: {str(position_time)}")
+		if self.debug == 1:
+			print(f"Ratio: {str(ratio)}, timeDif: {str(timeDif)}, pt: {str(position_time)}")
 
 		
 		# Round Values from Float to Integers
