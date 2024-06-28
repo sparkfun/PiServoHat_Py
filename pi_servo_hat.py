@@ -294,10 +294,10 @@ class PiServoHat(object):
 		Reads and returns the current min and max pulse times for servo movement
 
 		Returns:
-			String: A string containing the min and max pulse time values
+			tuple: The minimum and maximum pulse times in milliseconds
 		"""
 
-		return f"Minimum Pulse Time: {str(self.minimumPulseWidth)} \nMaximum Pulse Time: {str(self.maximumPulseWidth)}"
+		return (self.minimumPulseWidth, self.maximumPulseWidth)
 
 	#----------------------------------------------
 	# Updates the min and max pulse times for all servos by times in milliseconds
