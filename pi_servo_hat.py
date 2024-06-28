@@ -517,3 +517,20 @@ class PiServoHat(object):
 			print("On value: %s" % initial_on)
 		
 		return position
+			
+	#----------------------------------------------
+	# Sleep PCA9685
+	def sleep(self):
+		"""
+		Set the SLEEP bit to 1, which will unpower the servos. This preserves the life of the servos.
+		"""
+		self.PCA9685.set_sleep_bit(1)
+
+	#----------------------------------------------
+	# Wake PCA9685
+	def wake(self):
+		"""
+		Set the SLEEP bit to 0, which will power the servos.
+		"""
+		self.PCA9685.set_sleep_bit(0)
+		time.sleep(0.001)  # wait for oscillator to stabilize
