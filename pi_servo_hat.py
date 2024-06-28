@@ -461,6 +461,8 @@ class PiServoHat(object):
 		# Debug message
 		if self.debug == 1:
 			print("On value: %s" % initial_on)
+		
+		return position
 			
 	#----------------------------------------------
 	# Sleep PCA9685
@@ -478,5 +480,3 @@ class PiServoHat(object):
 		"""
 		self.PCA9685.set_sleep_bit(0)
 		time.sleep(0.001)  # wait for oscillator to stabilize
-		
-		return position
