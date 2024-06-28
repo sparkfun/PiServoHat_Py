@@ -136,7 +136,7 @@ class PiServoHat(object):
 	
 	#----------------------------------------------
 	# Constructor
-	def __init__(self, address=None, debug = None):
+	def __init__(self, address=None, debug = None, min_pt=1, max_pt=2):
 		"""
 		This method initializes the class object. If no 'address' or
 		'i2c_driver' are inputed or 'None' is specified, the method will
@@ -151,6 +151,12 @@ class PiServoHat(object):
 							statements.
 							0-	Don't print debug statements
 							1-	Print debug statements
+		:param min_pt:		The minimum pulse time of the servos in 
+							milliseconds.  If not provided, default to 
+							1 ms 
+		:param max_pt:		The maximum pulse time of the servos in 
+							milliseconds.  If not provided, default to 
+							2 ms 
 		"""
 		
 		# Did the user specify an I2C address?
@@ -184,6 +190,20 @@ class PiServoHat(object):
 		self.set_pwm_frequency(_DEFAULT_SERVO_FREQUENCY)
 
 		#----------------------------------------------
+		# Sets the minimum pulse widths for the servos
+		self.minimum_pulse_width = float(min_pt)
+
+		#----------------------------------------------
+		# Sets the maximum pulse widths for the servos
+		self.maximum_pulse_width = float(max_pt)
+
+		#----------------------------------------------
+		# Error check to make sure minimum pulse is less than max
+		if self.maximum_pulse_width < self.minimum_pulse_width:
+			self.minimum_pulse_width = max_pt
+			self.maximum_pulse_width = min_pt
+
+		#----------------------------------------------
 		# Begin operation
 		self.PCA9685.begin()
 
@@ -211,7 +231,7 @@ class PiServoHat(object):
 	# Read PWM Frequency
 	def get_pwm_frequency(self):
 		"""
-		Reads the PWM frequency used on outputs. 50 Hz is recomended
+		Reads the PWM frequency used on outputs. 50 Hz is recommended
 		for most servos.
 
 		:return:	PWM Frequency
@@ -232,7 +252,7 @@ class PiServoHat(object):
 	def set_pwm_frequency(self, frequency = None):
 		"""
 		Configures the PWM frequency used on outputs. 50 Hz is the
-		default and recomended for most servos.
+		default and recommended for most servos.
 
 		:param frequency:	PWM Frequency
 							Range: 24 Hz to 1526 Hz
@@ -267,7 +287,43 @@ class PiServoHat(object):
 		else:
 			return False
 
+	#----------------------------------------------
+	# Lists the current min and max pulse times
+	def get_pulse_time(self):
+		"""
+		Reads and returns the current min and max pulse times for servo movement
 
+		Returns:
+			tuple: The minimum and maximum pulse times in milliseconds
+		"""
+
+		return (self.minimum_pulse_width, self.maximum_pulse_width)
+
+	#----------------------------------------------
+	# Updates the min and max pulse times for all servos by times in milliseconds
+	def set_pulse_time(self, min_pulse_time, max_pulse_time):
+		"""
+		Updates the minimum and maximum pulse widths for the servos
+
+		Args:
+			min_pulse_time (float): The new minimum pulse width in ms
+			max_pulse_time (float): The new maximum pulse width in ms
+
+		Returns:
+			bool: Returns true if update was successful, false if an error was encountered
+		"""
+
+		try:
+			if float(min_pulse_time) < float(max_pulse_time):
+				self.minimum_pulse_width = min_pulse_time
+				self.maximum_pulse_width = max_pulse_time
+			else:
+				self.maximum_pulse_width = min_pulse_time
+				self.minimum_pulse_width = max_pulse_time
+
+			return True
+		except:
+			return False
 	#----------------------------------------------
 	# Moves Servo on Specified Channel to Position (in Degrees)
 	def move_servo_position(self, channel, position, swing = None):
@@ -315,15 +371,6 @@ class PiServoHat(object):
 		# Debug message
 		if self.debug == 1:
 			print("Servo Range: %s" % swing)
-
-		# 180 Degree Servo Timing:
-		# 	0 	Degrees	=	1.0	ms
-		#	90	Degrees	=	1.5	ms
-		#	180	Degrees	=	2.0	ms
-		# 90 Degree Servo Timing:
-		# 	0 	Degrees	=	1.0	ms
-		# 	45	Degrees	=	1.5	ms
-		#	90	Degrees	=	2.0	ms
 		
 		if swing == None:
 			swing = 90	# Default
@@ -331,8 +378,15 @@ class PiServoHat(object):
 			raise Exception("Error: 'swing' input value. Must be 90 or 180.")
 		
 		# Servo Timing
-		m = 1 / swing								# ms/degree
-		position_time = (m *position + 1) / 1000	# seconds (float)
+		ratio = float(position) / swing # the ratio of the movement to the max angle
+		time_dif = self.maximum_pulse_width - self.minimum_pulse_width # the representation of the max movement range in terms of time
+
+		# converts movement back into a position time
+		position_time = ((ratio * time_dif) + self.minimum_pulse_width) / 1000 # convert back into seconds (float)
+
+		if self.debug == 1:
+			print(f"Ratio: {str(ratio)}, time_dif: {str(time_dif)}, pt: {str(position_time)}")
+
 		
 		# Round Values from Float to Integers
 		on_value = round(delay)									# integer
