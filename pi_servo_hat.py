@@ -207,6 +207,18 @@ class PiServoHat(object):
 		# Begin operation
 		self.PCA9685.begin()
 
+	#----------------------------------------------
+	# Check if Connected
+	def is_connected(self):
+		"""
+		Is an I2C connection established with the device?
+
+		:return:	Device Connection Status
+					True-	Connected
+					False-	Not Connected
+		:rtype:		Bool
+		"""
+		return self.PCA9685.is_connected()
 
 	#----------------------------------------------
 	# Restart PCA9685
