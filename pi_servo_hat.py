@@ -136,7 +136,7 @@ class PiServoHat(object):
 	
 	#----------------------------------------------
 	# Constructor
-	def __init__(self, address=None, debug = None, minPT=1, maxPT=2):
+	def __init__(self, address=None, debug = None, min_pt=1, max_pt=2):
 		"""
 		This method initializes the class object. If no 'address' or
 		'i2c_driver' are inputed or 'None' is specified, the method will
@@ -151,10 +151,10 @@ class PiServoHat(object):
 							statements.
 							0-	Don't print debug statements
 							1-	Print debug statements
-		:param minPT:		The minimum pulse time of the servos in 
+		:param min_pt:		The minimum pulse time of the servos in 
 							milliseconds.  If not provided, default to 
 							1 ms 
-		:param maxPT:		The maximum pulse time of the servos in 
+		:param max_pt:		The maximum pulse time of the servos in 
 							milliseconds.  If not provided, default to 
 							2 ms 
 		"""
@@ -191,17 +191,17 @@ class PiServoHat(object):
 
 		#----------------------------------------------
 		# Sets the minimum pulse widths for the servos
-		self.minimumPulseWidth = float(minPT)
+		self.minimum_pulse_width = float(min_pt)
 
 		#----------------------------------------------
 		# Sets the maximum pulse widths for the servos
-		self.maximumPulseWidth = float(maxPT)
+		self.maximum_pulse_width = float(max_pt)
 
 		#----------------------------------------------
 		# Error check to make sure minimum pulse is less than max
-		if self.maximumPulseWidth < self.minimumPulseWidth:
-			self.minimumPulseWidth = maxPT
-			self.maximumPulseWidth = minPT
+		if self.maximum_pulse_width < self.minimum_pulse_width:
+			self.minimum_pulse_width = max_pt
+			self.maximum_pulse_width = min_pt
 
 		#----------------------------------------------
 		# Begin operation
@@ -297,29 +297,29 @@ class PiServoHat(object):
 			tuple: The minimum and maximum pulse times in milliseconds
 		"""
 
-		return (self.minimumPulseWidth, self.maximumPulseWidth)
+		return (self.minimum_pulse_width, self.maximum_pulse_width)
 
 	#----------------------------------------------
 	# Updates the min and max pulse times for all servos by times in milliseconds
-	def set_pulse_time(self, minPulseTime, maxPulseTime):
+	def set_pulse_time(self, min_pulse_time, max_pulse_time):
 		"""
 		Updates the minimum and maximum pulse widths for the servos
 
 		Args:
-			minPulseTime (float): The new minimum pulse width in ms
-			maxPulseTime (float): The new maximum pulse width in ms
+			min_pulse_time (float): The new minimum pulse width in ms
+			max_pulse_time (float): The new maximum pulse width in ms
 
 		Returns:
 			bool: Returns true if update was successful, false if an error was encountered
 		"""
 
 		try:
-			if float(minPulseTime) < float(maxPulseTime):
-				self.minimumPulseWidth = minPulseTime
-				self.maximumPulseWidth = maxPulseTime
+			if float(min_pulse_time) < float(max_pulse_time):
+				self.minimum_pulse_width = min_pulse_time
+				self.maximum_pulse_width = max_pulse_time
 			else:
-				self.maximumPulseWidth = minPulseTime
-				self.minimumPulseWidth = maxPulseTime
+				self.maximum_pulse_width = min_pulse_time
+				self.minimum_pulse_width = max_pulse_time
 
 			return True
 		except:
@@ -379,13 +379,13 @@ class PiServoHat(object):
 		
 		# Servo Timing
 		ratio = float(position) / swing # the ratio of the movement to the max angle
-		timeDif = self.maximumPulseWidth - self.minimumPulseWidth # the representation of the max movement range in terms of time
+		time_dif = self.maximum_pulse_width - self.minimum_pulse_width # the representation of the max movement range in terms of time
 
 		# converts movement back into a position time
-		position_time = ((ratio * timeDif) + self.minimumPulseWidth) / 1000 # convert back into seconds (float)
+		position_time = ((ratio * time_dif) + self.minimum_pulse_width) / 1000 # convert back into seconds (float)
 
 		if self.debug == 1:
-			print(f"Ratio: {str(ratio)}, timeDif: {str(timeDif)}, pt: {str(position_time)}")
+			print(f"Ratio: {str(ratio)}, time_dif: {str(time_dif)}, pt: {str(position_time)}")
 
 		
 		# Round Values from Float to Integers
